@@ -1,0 +1,9 @@
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/icudtl.dat
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/flutter_windows.dll
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/NOTICES
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf

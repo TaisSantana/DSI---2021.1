@@ -1,0 +1,10 @@
+^C:\USERS\TAIS_\DOCUMENTS\DSI 2021.2\TOPICO1\BUILD\WINDOWS\CMAKEFILES\476074AC81F60F79818FAA00140DFEBF\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/tais_/Documents/DSI 2021.2/topico1/windows" "-BC:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/topico1.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

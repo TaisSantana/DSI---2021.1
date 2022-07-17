@@ -1,0 +1,28 @@
+^C:\USERS\TAIS_\DOCUMENTS\DSI 2021.2\TOPICO1\BUILD\WINDOWS\CMAKEFILES\CC7E5D030D440C6AAE03911594021B86\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\flutter "PROJECT_DIR=C:\Users\tais_\Documents\DSI 2021.2\topico1" FLUTTER_ROOT=C:\flutter "FLUTTER_EPHEMERAL_DIR=C:\Users\tais_\Documents\DSI 2021.2\topico1\windows\flutter\ephemeral" "PROJECT_DIR=C:\Users\tais_\Documents\DSI 2021.2\topico1" "FLUTTER_TARGET=C:\Users\tais_\Documents\DSI 2021.2\topico1\lib\main.dart" DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=C:\Users\tais_\Documents\DSI 2021.2\topico1\.dart_tool\package_config.json" C:/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\TAIS_\DOCUMENTS\DSI 2021.2\TOPICO1\BUILD\WINDOWS\CMAKEFILES\44DC433D4F6B94BF5392A31FC647454F\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\TAIS_\DOCUMENTS\DSI 2021.2\TOPICO1\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/tais_/Documents/DSI 2021.2/topico1/windows" "-BC:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows" --check-stamp-file "C:/Users/tais_/Documents/DSI 2021.2/topico1/build/windows/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
