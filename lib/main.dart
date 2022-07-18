@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,6 +29,7 @@ class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final favoritos = <WordPair>{};
   final fonte = const TextStyle(fontSize: 18);
+  bool ehCard = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,42 +42,19 @@ class _RandomWordsState extends State<RandomWords> {
             onPressed: _pushSaved,
             tooltip: 'Mostrar Favoritos',
           ),
-        ],
-      ),               
-      body: ListView.builder( 
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          if (i.isOdd) return const Divider(); /*2*/
-          
-          final index = i ~/ 2; 
-          //Se chegar no fim da lista, gerar mais 10 palavras e colocar na lista.
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          final jaFoiFavoritado = favoritos.contains(_suggestions[index]);
-
-          return ListTile(
-            title: Text(
-              _suggestions[index].asPascalCase,
-              style: fonte,
-            ),
-            trailing: Icon(   
-              jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
-              color: jaFoiFavoritado ? Colors.lightBlue : null,
-              semanticLabel: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
-            ),
-            onTap: () {        
+          IconButton(
+            icon: const Icon(Icons.grid_view),
+            onPressed: (){
               setState(() {
-                if (jaFoiFavoritado) {
-                  favoritos.remove(_suggestions[index]);
-                } else {
-                  favoritos.add(_suggestions[index]);
-                }
+                ehCard = !ehCard;
               });
-            },         
-          );
-        },
+            },
+            tooltip: 'Mudar Layout',
+          ),
+          
+        ],
       ),
+      body: ehCard ? formatoCards() : formatoLista()
     );
   }
 
@@ -110,5 +89,62 @@ class _RandomWordsState extends State<RandomWords> {
       ),
     );
   }
+  
+  Widget formatoLista() {
+    return ListView.builder( 
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (context, i) {
+        if (i.isOdd) return const Divider(); /*2*/
+        
+        final index = i ~/ 2; 
+        //Se chegar no fim da lista, gerar mais 10 palavras e colocar na lista.
+        if (index >= _suggestions.length) {
+          _suggestions.addAll(generateWordPairs().take(10));
+        }
+        
+        return configuracaoFavoritos(_suggestions[index]);
+      },
+    );
+  }
 
+  Widget formatoCards() {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 2, mainAxisSpacing: 2,mainAxisExtent: 100.0),
+      padding: const EdgeInsets.all(16),
+      itemBuilder: (context, i) {
+        if (i >= _suggestions.length) {
+          _suggestions.addAll(generateWordPairs().take(10));
+        }
+        return Card(
+          child: configuracaoFavoritos(_suggestions[i]),
+        );
+      },
+    );
+  }
+
+ //settado para cada palavra
+  Widget configuracaoFavoritos(WordPair pair) {
+
+    final jaFoiFavoritado = favoritos.contains(pair);
+    return ListTile(
+      title: Text(
+        pair.asPascalCase,
+        style: fonte,
+      ),
+      trailing: Icon(     
+        jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
+        color: jaFoiFavoritado ? Colors.lightBlue : null,
+        semanticLabel: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
+      ),
+      onTap: () {    
+        setState(() {
+          if (jaFoiFavoritado) {
+            favoritos.remove(pair);
+          } else {
+            favoritos.add(pair);
+          }
+        });
+      },              
+    );
+  }
 }
