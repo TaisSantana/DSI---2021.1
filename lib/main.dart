@@ -131,20 +131,19 @@ class _RandomWordsState extends State<RandomWords> {
         pair.asPascalCase,
         style: fonte,
       ),
-      trailing: Icon(     
-        jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
-        color: jaFoiFavoritado ? Colors.lightBlue : null,
-        semanticLabel: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
-      ),
-      onTap: () {    
-        setState(() {
-          if (jaFoiFavoritado) {
-            favoritos.remove(pair);
-          } else {
-            favoritos.add(pair);
-          }
-        });
-      },              
+      trailing:IconButton(
+            icon: 
+              Icon(     
+                jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
+              ),
+            color: jaFoiFavoritado ? Colors.lightBlue : null,
+            onPressed: () {
+              setState(() {
+                jaFoiFavoritado ? favoritos.remove(pair) : favoritos.add(pair);
+              });
+            },
+            tooltip: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
+          ),           
     );
   }
 }
