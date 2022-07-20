@@ -102,7 +102,7 @@ class _RandomWordsState extends State<RandomWords> {
           _suggestions.addAll(generateWordPairs().take(10));
         }
         
-        return configuracaoFavoritos(_suggestions[index]);
+        return configuracaoFavoritos(_suggestions[index],index);
       },
     );
   }
@@ -116,22 +116,37 @@ class _RandomWordsState extends State<RandomWords> {
           _suggestions.addAll(generateWordPairs().take(10));
         }
         return Card(
-          child: configuracaoFavoritos(_suggestions[i]),
+          child: configuracaoFavoritos(_suggestions[i],i),
         );
       },
     );
   }
 
  //settado para cada palavra
-  Widget configuracaoFavoritos(WordPair pair) {
+  Widget configuracaoFavoritos(WordPair pair, int index) {
 
     final jaFoiFavoritado = favoritos.contains(pair);
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: fonte,
+
+    return Dismissible(
+      background: Container(
+        color: Colors.red,
       ),
-      trailing:IconButton(
+      key: ValueKey<WordPair>(pair),
+      onDismissed: (DismissDirection direction) {
+        setState(() {
+          _suggestions.removeAt(index);
+          if (jaFoiFavoritado){
+            favoritos.remove(pair);
+          }
+        });
+      },
+      child: 
+        ListTile(
+          title: Text(
+            pair.asPascalCase,
+            style: fonte,
+          ),
+          trailing:IconButton(
             icon: 
               Icon(     
                 jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
@@ -144,6 +159,7 @@ class _RandomWordsState extends State<RandomWords> {
             },
             tooltip: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
           ),           
+        ),
     );
   }
 }
