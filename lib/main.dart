@@ -11,10 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gerador de nomes Taís',
+      title: 'Gerador de nomes Tatah',
+      theme:ThemeData(
+        primarySwatch: Colors.purple
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Gerador de nomes Taís'),
+          title: const Text('Gerador de nomes Tatah'),
         ),
         body: const Center(
           child: RandomWords(),
@@ -40,6 +43,7 @@ class _RandomWordsState extends State<RandomWords> {
     return ListView.builder(
     padding: const EdgeInsets.all(16.0),
     itemBuilder: (context, i) {
+      //adiciona sempre que for numero impar um divisor entre a palavra de cima e de baixo
       if (i.isOdd) return const Divider(); /*2*/
       
       final index = i ~/ 2; 
