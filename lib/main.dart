@@ -75,8 +75,8 @@ class _RandomWordsState extends State<RandomWords> {
               );
             },
           );
-          final divided = tiles.isNotEmpty
-              ? ListTile.divideTiles(
+          final divided = tiles.isNotEmpty? 
+              ListTile.divideTiles(
                   context: context,
                   tiles: tiles,
                 ).toList()
@@ -97,7 +97,7 @@ class _RandomWordsState extends State<RandomWords> {
     return ListView.builder( 
       padding: const EdgeInsets.all(16.0),
       itemBuilder: (context, i) {
-        if (i.isOdd) return const Divider(); /*2*/
+        if (i.isOdd) return const Divider();
         
         final index = i ~/ 2; 
         //Se chegar no fim da lista, gerar mais 10 palavras e colocar na lista.
@@ -105,7 +105,7 @@ class _RandomWordsState extends State<RandomWords> {
           _suggestions.addAll(generateWordPairs().take(10));
         }
         
-        return configuracaoFavoritos(_suggestions[index]);
+        return configuracaoFavoritos(_suggestions[index],index);
       },
     );
   }
@@ -114,39 +114,60 @@ class _RandomWordsState extends State<RandomWords> {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 2, mainAxisSpacing: 2,mainAxisExtent: 100.0),
       padding: const EdgeInsets.all(16),
-      itemBuilder: (context, i) {
-        if (i >= _suggestions.length) {
+      itemBuilder: (context, index) {
+        if (index >= _suggestions.length) {
           _suggestions.addAll(generateWordPairs().take(10));
         }
         return Card(
-          child: configuracaoFavoritos(_suggestions[i]),
+          child: configuracaoFavoritos(_suggestions[index],index),
         );
       },
     );
   }
 
  //settado para cada palavra
-  Widget configuracaoFavoritos(WordPair pair) {
+  Widget configuracaoFavoritos(WordPair pair, int index) {
 
     final jaFoiFavoritado = favoritos.contains(pair);
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: fonte,
-      ),
-      trailing:IconButton(
-            icon: 
-              Icon(     
-                jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
-              ),
-            color: jaFoiFavoritado ? Colors.lightBlue : null,
-            onPressed: () {
-              setState(() {
-                jaFoiFavoritado ? favoritos.remove(pair) : favoritos.add(pair);
-              });
-            },
-            tooltip: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
-          ),           
+    return Dismissible(
+      background: Container(
+        color: Colors.red,
+        ),
+      onDismissed: (DismissDirection direction) {
+        setState(() {
+          _suggestions.removeAt(index);
+          if (jaFoiFavoritado){
+            favoritos.remove(pair);
+          }
+        });
+      },
+      key: ValueKey<WordPair>(pair),
+      child:
+        ListTile(
+          title: Text(
+            pair.asPascalCase,
+            style: fonte,
+          ),
+          trailing:IconButton(
+                icon: 
+                  Icon(     
+                    jaFoiFavoritado ? Icons.favorite : Icons.favorite_border,
+                  ),
+                color: jaFoiFavoritado ? Colors.lightBlue : null,
+                onPressed: () {
+                  setState(() {
+                    jaFoiFavoritado ? favoritos.remove(pair) : favoritos.add(pair);
+                  });
+                },
+                tooltip: jaFoiFavoritado ? 'Remover favorito' : 'Favoritar',
+              ),           
+        ),
+        
     );
+  }
+
+
+  void remove(int index){
+    
   }
 }
